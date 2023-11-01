@@ -1,117 +1,115 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
-
-(__TODO__: your project name)
-
-# Shoppy Shoperson 
+# Poker Tracker 
 
 ## Overview
 
-(__TODO__: a brief one or two paragraph, high-level description of your project)
+Whether you play poker for fun with your friends or play professionally at the highest levels, it is helpful to keep track of your poker progress. 
 
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
-
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
-
+Poker Tracker is a web app that allows users to keep track of their poker sessions in a simple format. Users can create an account, and immediately start logging their sessions. Users can filter their poker reports by location, game type, date, etc.
 
 ## Data Model
 
-(__TODO__: a description of your application's data and their relationships to each other) 
+The application will store Users, Game Sessions, Game Type, Locations, Profits/Losses, Dates, and Blinds
 
-The application will store Users, Lists and Items
-
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
-
-(__TODO__: sample documents)
+* Users will have multiple game sessions stored by reference
+* Game sessions will store the location, game type, blinds, date and time, profits/losses.
 
 An Example User:
 
 ```javascript
 {
-  username: "shannonshopper",
+  username: "TiltedFish",
   hash: // a password hash,
-  lists: // an array of references to List documents
+  gameSessions: // an array of references to GameSession documents
 }
 ```
 
-An Example List with Embedded Items:
+An Example Game Session with session details:
 
 ```javascript
 {
   user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
-  ],
-  createdAt: // timestamp
+  gameType: "PLO",
+  blinds: "1/2",
+  date: // reference to Date object,
+  profit: 100
+  location: "John's House"
 }
 ```
 
-
 ## [Link to Commented First Draft Schema](db.mjs) 
-
-(__TODO__: create a first draft of your Schemas in db.mjs and link to it)
 
 ## Wireframes
 
 (__TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc.)
 
-/list/create - page for creating a new shopping list
+/home - page users are directed to when first entering the site
 
-![list create](documentation/list-create.png)
+![list create](documentation/home.jpg)
 
-/list - page for showing all shopping lists
+/sessions - page for displaying all of the user's logged sessions
 
-![list](documentation/list.png)
+![list](documentation/sessions.jpg)
 
-/list/slug - page for showing specific shopping list
+/sessions/:sessionCode - page for showing specific session details
 
-![list](documentation/list-slug.png)
+![list](documentation/sessions-foo.jpg)
+
+/add - page for creating a new poker session
+
+![list](documentation/add.jpg)
+
+/report - page for displaying a report summary of sessions
+
+![list](documentation/report.jpg)
+
+/settings - page for adjusting user settings
+
+![list](documentation/settings.jpg)
+
+/login - page to login for existing users
+
+![list](documentation/login.jpg)
+
+/register - page to register as a user
+
+![list](documentation/register.jpg)
+
 
 ## Site map
 
-(__TODO__: draw out a site map that shows how pages are related to each other)
-
-Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia/commons/2/20/Sitemap_google.jpg), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
+![Sitemap](documentation/sitemap.png)
 
 ## User Stories or Use Cases
 
-(__TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://en.wikipedia.org/wiki/Use_case))
-
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
-4. as a user, I can view all of the grocery lists I've created in a single list
-5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
+3. as a user, I can log a current or previous poker session
+4. as a user, I can view all of the sessions that I have logged
+5. as a user, I can edit individual session details
+6. as a user, I can filter sessions by date, location, stakes, and game type
+7. as a user, I can manage my app settings to better fit my preferences
+8. as a user, I can produce an overall report of game logs 
 
 ## Research Topics
 
-(__TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed)
+* (6 points) User authentication
+    * I plan to integrate user authentication
+    * If the provided credential matches the stored value, the user is successfully authenticated, and access is granted.
+    * I plan on researching Passport.js for my project
+* (3 points) Perform client side form validation using custom JavaScript or JavaScript library
+    * This is to make sure that forms have valid inputs before getting submitted
+    * Some libraries I can use are: FormValidation, Parsley.js, or using Jquery validation
+* (6 points) Front-end Framework
+    * A front-end framework is a JavaScript library that helps developers build user interfaces and web applications.
+    * Some frameworks I plan on researching are React.js and Next.js
 
-* (5 points) Integrate user authentication
-    * I'm going to be using passport for user authentication
-    * And account has been made for testing; I'll email you the password
-    * see <code>cs.nyu.edu/~jversoza/ait-final/register</code> for register page
-    * see <code>cs.nyu.edu/~jversoza/ait-final/login</code> for login page
-* (4 points) Perform client side form validation using a JavaScript library
-    * see <code>cs.nyu.edu/~jversoza/ait-final/my-form</code>
-    * if you put in a number that's greater than 5, an error message will appear in the dom
-* (5 points) vue.js
-    * used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
-
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit)
-
+15 points total out of 10 required points 
 
 ## [Link to Initial Main Project File](app.mjs) 
 
-(__TODO__: create a skeleton Express application with a package.json, app.mjs, views folder, etc. ... and link to your initial app.mjs)
-
 ## Annotations / References Used
 
-(__TODO__: list any tutorials/references/etc. that you've based your code off of)
-
 1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this)
+2. [tutorial on next.js](https://nextjs.org/learn-pages-router/basics/create-nextjs-app) - (add link to source code that was based on this)
+2. [guide on FormValidation](https://formvalidation.io/guide/)
 
