@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors(
     {   
         // TODO: change url to front end link
-        origin: '',
+        origin: 'https://poker-tracker-xi.vercel.app',
         methods: ['POST', 'GET', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type'],
     }
