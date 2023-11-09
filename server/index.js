@@ -13,8 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS Policy (Cross-Origin Resource Sharing)
 // middleware for handling CORS policy
-app.use(cors())
-/*
+//app.use(cors())
+
 app.use(cors(
     {   
         // TODO: change url to front end link
@@ -22,7 +22,7 @@ app.use(cors(
         methods: ['POST', 'GET', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type'],
     }
-))*/
+))
 
 
 app.get('/', (req, res) => {
