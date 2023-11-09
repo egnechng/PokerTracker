@@ -23,12 +23,15 @@ app.use(cors(
         allowedHeaders: ['Content-Type'],
     }
 ))
-// route middleware
-app.use('/sessions', sessionRoutes)
+
 
 app.get('/', (req, res) => {
-    res.send('Poker Tracker!')
+    console.log(req);
+    return res.status(234).send('Welcome To Poker Tracker');
 })
+
+// route middleware
+app.use('/sessions', sessionRoutes)
 
 /*
 app.get('/add', (req, res) => {
