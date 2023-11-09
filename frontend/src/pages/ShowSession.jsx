@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import BackButton from '../components/BackButton.jsx'
 import Spinner from '../components/Spinner.jsx'
 
-const API_URL = 'http://localhost:5555'
+const API_URL = 'https://poker-tracker-backend.vercel.app'
 
 const ShowSession = () => {
     const [session, setSession] = useState([])

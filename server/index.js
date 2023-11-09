@@ -13,18 +13,16 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS Policy (Cross-Origin Resource Sharing)
 // middleware for handling CORS policy
-app.use(cors())
-/*
+// app.use(cors())
+
 app.use(cors(
     {   
-        // TODO: change url
-        origin: 'https://poker-tracker.vercel.app',
+        // TODO: change url to front end link
+        origin: '',
         methods: ['POST', 'GET', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
-        credentials: true
+        allowedHeaders: ['Content-Type'],
     }
 ))
-*/
 // route middleware
 app.use('/sessions', sessionRoutes)
 

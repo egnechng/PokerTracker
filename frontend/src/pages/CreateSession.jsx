@@ -4,7 +4,7 @@ import Spinner from '../components/Spinner.jsx'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-const API_URL = 'http://localhost:5555'
+const API_URL = 'https://poker-tracker-backend.vercel.app'
 
 const CreateSession = () => {
   // form stuff, states

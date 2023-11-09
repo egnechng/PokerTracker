@@ -6,7 +6,7 @@ import { AiOutlineEdit } from 'react-icons/ai'
 import { BsInfoCircle } from 'react-icons/bs'
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md'
 
-const API_URL = 'http://localhost:5555'
+const API_URL = 'https://poker-tracker-backend.vercel.app'
 
 const Home = () => {
     const [sessions, setSessions] = useState([])
