@@ -11,7 +11,6 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
-// CORS Policy (Cross-Origin Resource Sharing)
 // middleware for handling CORS policy
 //app.use(cors())
 
