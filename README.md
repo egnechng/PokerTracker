@@ -122,7 +122,7 @@ An Example Game Session with session details:
 
 ## Annotations / References Used
 
-1. [basic tutorial for MERN stack](https://www.youtube.com/watch?v=-42K44A1oMA)
+1. [basic tutorial for MERN stack](https://www.youtube.com/watch?v=-42K44A1oMA) - [inspiration for spinner and back button](frontend/src/components/Spinner.jsx)
 2. [tutorial on hosting MERN app on Vercel](https://www.youtube.com/watch?v=Cfi0mymfKiA) - [link to vercel config](server/vercel.json)
 3. [guide on FormValidation](https://formvalidation.io/guide/)
 4. [axios guide](https://www.geeksforgeeks.org/axios-in-react-a-guide-for-beginners/)
