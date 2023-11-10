@@ -1,7 +1,6 @@
 import express from "express"
 import './config.js'
 import mongoose from 'mongoose'
-import { GameSession } from './models/sessionModel.js'
 import sessionRoutes from './routes/sessionRoutes.js'
 import cors from 'cors'
 
@@ -32,7 +31,6 @@ app.get('/', (req, res) => {
 // route middleware
 app.use('/sessions', sessionRoutes)
 
-// console.log(process.env.MONGODB_URI)
 mongoose
     .connect(process.env.MONGODB_URI)
     .then(() => {

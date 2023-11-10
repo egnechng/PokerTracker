@@ -44,7 +44,7 @@ const Home = () => {
                             <th className='border border-slate-600 rounded-md'>Game Type</th>
                             <th className='border border-slate-600 rounded-md'>Blinds</th>
                             <th className='border border-slate-600 rounded-md'>Location</th>
-                            <th className='border border-slate-600 rounded-md max-md:hidden'>Duration</th>
+                            <th className='border border-slate-600 rounded-md'>Duration</th>
                             <th className='border border-slate-600 rounded-md'>Actions</th>
                         </tr>
                     </thead>
@@ -63,7 +63,7 @@ const Home = () => {
                                 <td className='border border-slate-700 rounded-md text-center'>
                                     {session.location}
                                 </td>
-                                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                                <td className='border border-slate-700 rounded-md text-center'>
                                     {session.duration}
                                 </td>
                                 <td className='border border-slate-700 rounded-md text-center'>
