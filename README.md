@@ -3,5 +3,4 @@ research topics
     - vite
     - tailwind
 - axios
-- using more form validation handling
 - express routers

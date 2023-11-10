@@ -66,7 +66,7 @@ const Home = () => {
                                 <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
                                     {session.duration}
                                 </td>
-                                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
+                                <td className='border border-slate-700 rounded-md text-center'>
                                     <div className='flex justify-center gap-x-4'>
                                         <Link to={`/sessions/details/${session._id}`}>
                                             <BsInfoCircle className='text-green-800 text-2xl' />
