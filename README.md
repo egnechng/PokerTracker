@@ -1,4 +1,4 @@
-# Poker Tracker 
+# Poker Tracker (updated partially for Milestone 2)
 
 ## Overview
 
@@ -19,7 +19,7 @@ An Example User:
 {
   username: "TiltedFish",
   hash: // a password hash,
-  gameSessions: // an array of references to GameSession documents
+  gameSessions: // an array of references to GameSession ids
 }
 ```
 
@@ -27,7 +27,7 @@ An Example Game Session with session details:
 
 ```javascript
 {
-  user: // a reference to a User object
+  _id: "654c523b0a947810535927f"
   gameType: "PLO",
   blinds: "1/2",
   date: // reference to Date object,
@@ -36,11 +36,9 @@ An Example Game Session with session details:
 }
 ```
 
-## [Link to Commented First Draft Schema](db.mjs) 
+## [Link to Commented First Draft Schema](server/models/sessionModel.js) 
 
 ## Wireframes
-
-(__TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc.)
 
 /home - page users are directed to when first entering the site
 
@@ -90,7 +88,7 @@ An Example Game Session with session details:
 7. as a user, I can manage my app settings to better fit my preferences
 8. as a user, I can produce an overall report of game logs 
 
-## Research Topics
+## Research Topics (Milestone 1)
 
 * (6 points) User authentication
     * I plan to integrate user authentication
@@ -105,11 +103,29 @@ An Example Game Session with session details:
 
 15 points total out of 10 required points 
 
-## [Link to Initial Main Project File](app.mjs) 
+## Research Topics for Milestone 2
+* Front-end Framework
+    * I decided to go with the MERN stack for my project
+    * using React with Vite and Tailwind
+* Vite
+    * Build tool and development server
+    * Fast and efficient
+* Tailwind
+    * CSS framework
+    * Avoid writing CSS styles, apply classes directly in markup
+* Axios
+    * JS library for sending async HTTP requests to server
+    * helpful for making API calls to server from front end
+
+
+## [Link to Initial Main Project File](server/index.js) 
 
 ## Annotations / References Used
 
-1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-2. [tutorial on next.js](https://nextjs.org/learn-pages-router/basics/create-nextjs-app) - (add link to source code that was based on this)
-2. [guide on FormValidation](https://formvalidation.io/guide/)
+1. [basic tutorial for MERN stack](https://www.youtube.com/watch?v=-42K44A1oMA) - [inspiration for spinner and back button](frontend/src/components/Spinner.jsx)
+2. [tutorial on hosting MERN app on Vercel](https://www.youtube.com/watch?v=Cfi0mymfKiA) - [link to vercel config](server/vercel.json)
+3. [guide on FormValidation](https://formvalidation.io/guide/)
+4. [axios guide](https://www.geeksforgeeks.org/axios-in-react-a-guide-for-beginners/)
+5. [vite docs](https://vitejs.dev/)
+6. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
 
