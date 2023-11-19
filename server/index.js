@@ -15,7 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors(
     {   
-        // TODO: change url to front end link
         origin: ['https://poker-tracker-xi.vercel.app'],
         methods: ['POST', 'GET', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type'],
@@ -31,6 +30,7 @@ app.get('/', (req, res) => {
 // route middleware
 app.use('/sessions', sessionRoutes)
 
+// console.log(process.env.MONGODB_URI)
 mongoose
     .connect(process.env.MONGODB_URI)
     .then(() => {
