@@ -6,29 +6,21 @@ const router = express.Router()
 // Route to Add a new session
 router.post('/', async (req, res) => {
     try {
-        if (!req.body.gameType || !req.body.blinds || !req.body.duration || !req.body.location
-        ) {
+        if (!req.body.gameType || !req.body.blinds || !req.body.duration || !req.body.location || 
+            !req.body.buyIn || !req.body.cashOut || !req.body.date 
+        ) { 
             return res.status(400).send({ message: "Required field(s) missing."})
         }
         // save new gameSession
-        // TODO: make full form for all fields
         const newGameSession = {
             gameType: req.body.gameType,
             blinds: req.body.blinds,
             duration: req.body.duration,
             location: req.body.location,
-            buyIn: 100,
-            cashOut: 200,
-            date: new Date()
+            buyIn: req.body.buyIn,
+            cashOut: req.body.cashOut,
+            date: req.body.date
         }
-
-        // TODO: add this stuff back
-        /*
-        buyIn: parseFloat(req.body.buyIn),
-            cashOut: parseFloat(req.body.cashOut),
-            date: req.body.date,
-          !req.body.buyIn || !req.body.cashOut 
-            || !req.body.date */
 
         const gameSession = await GameSession.create(newGameSession)
         console.log(gameSession)
@@ -72,8 +64,8 @@ router.get('/:id', async (req, res) => {
 // TODO: Make sure this works later
 router.put('/:id', async (req, res) => {
     try {
-        if (!req.body.gameType || !req.body.blinds || !req.body.buyIn || !req.body.cashOut 
-            || !req.body.date || !req.body.duration || !req.body.location
+        if (!req.body.gameType || !req.body.blinds || !req.body.duration || !req.body.location || 
+            !req.body.buyIn || !req.body.cashOut || !req.body.date 
         ) {
             return res.status(400).send({ message: "Required field(s) missing."})         
         }
