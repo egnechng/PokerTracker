@@ -81,42 +81,33 @@ An Example Game Session with session details:
 
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
-3. as a user, I can log a current or previous poker session
+3. as a user, I can log a poker session
 4. as a user, I can view all of the sessions that I have logged
 5. as a user, I can edit individual session details
 6. as a user, I can filter sessions by date, location, stakes, and game type
 7. as a user, I can manage my app settings to better fit my preferences
 8. as a user, I can produce an overall report of game logs 
 
-## Research Topics (Milestone 1)
 
-* (6 points) User authentication
-    * I plan to integrate user authentication
-    * If the provided credential matches the stored value, the user is successfully authenticated, and access is granted.
-    * I plan on researching Passport.js for my project
-* (3 points) Perform client side form validation using custom JavaScript or JavaScript library
-    * This is to make sure that forms have valid inputs before getting submitted
-    * Some libraries I can use are: FormValidation, Parsley.js, or using Jquery validation
-* (6 points) Front-end Framework
+## Research Topics (UPDATED for Milestone 3)
+* Front-end Framework (6 points)
     * A front-end framework is a JavaScript library that helps developers build user interfaces and web applications.
-    * Some frameworks I plan on researching are React.js and Next.js
-
-15 points total out of 10 required points 
-
-## Research Topics for Milestone 2
-* Front-end Framework
     * I decided to go with the MERN stack for my project
     * using React with Vite and Tailwind
-* Vite
+* Vite (3 points)
     * Build tool and development server
     * Fast and efficient
-* Tailwind
+* Tailwind (2 points)
     * CSS framework
     * Avoid writing CSS styles, apply classes directly in markup
 * Axios
     * JS library for sending async HTTP requests to server
     * helpful for making API calls to server from front end
+* User Authentication (6 points) -- NOT IMPLEMENTED YET
+    * If the provided credential matches the stored value, the user is successfully authenticated, and access is granted.
+    * I plan on researching Passport.js for my project
 
+17 + ? points out of 10 required points
 
 ## [Link to Initial Main Project File](server/index.js) 
 
@@ -124,8 +115,7 @@ An Example Game Session with session details:
 
 1. [basic tutorial for MERN stack](https://www.youtube.com/watch?v=-42K44A1oMA) - [inspiration for spinner and back button](frontend/src/components/Spinner.jsx)
 2. [tutorial on hosting MERN app on Vercel](https://www.youtube.com/watch?v=Cfi0mymfKiA) - [link to vercel config](server/vercel.json)
-3. [guide on FormValidation](https://formvalidation.io/guide/)
+3. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
 4. [axios guide](https://www.geeksforgeeks.org/axios-in-react-a-guide-for-beginners/)
 5. [vite docs](https://vitejs.dev/)
-6. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
 

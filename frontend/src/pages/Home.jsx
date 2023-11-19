@@ -6,11 +6,15 @@ import { AiOutlineEdit } from 'react-icons/ai'
 import { BsInfoCircle } from 'react-icons/bs'
 import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md'
 
-const API_URL = 'https://poker-tracker-backend.vercel.app'
+// const API_URL = 'https://poker-tracker-backend.vercel.app'
+const API_URL = import.meta.env.VITE_REACT_APP_BASE_URL;
 
 const Home = () => {
     const [sessions, setSessions] = useState([])
     const [loading, setLoading] = useState(false)
+    const sortedSessions = sessions
+        .slice() // Create a copy to avoid mutating the original array
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
 
     // This effect runs after every render (componentDidUpdate)
     useEffect(() => {
@@ -40,19 +44,23 @@ const Home = () => {
                 <table className='w-full border-separate border-spacing-2'>
                     <thead>
                         <tr>
-                            <th className='border border-slate-600 rounded-md'>No</th>
-                            <th className='border border-slate-600 rounded-md'>Game Type</th>
-                            <th className='border border-slate-600 rounded-md'>Blinds</th>
+                            <th className='border border-slate-600 rounded-md'>Date</th>
                             <th className='border border-slate-600 rounded-md'>Location</th>
+                            <th className='border border-slate-600 rounded-md'>Game</th>
+                            <th className='border border-slate-600 rounded-md'>Blinds</th>
                             <th className='border border-slate-600 rounded-md'>Duration</th>
+                            <th className='border border-slate-600 rounded-md'>Profit/Loss</th>
                             <th className='border border-slate-600 rounded-md'>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {sessions.map((session, index) => (
+                        {sortedSessions.map((session) => (
                             <tr key={session._id} className='h-8'>
                                 <td className='border border-slate-700 rounded-md text-center'>
-                                    {index + 1}
+                                    {session.date.split('T')[0]}
+                                </td>
+                                <td className='border border-slate-700 rounded-md text-center'>
+                                    {session.location}
                                 </td>
                                 <td className='border border-slate-700 rounded-md text-center'>
                                     {session.gameType}
@@ -60,11 +68,13 @@ const Home = () => {
                                 <td className='border border-slate-700 rounded-md text-center'>
                                     {session.blinds}
                                 </td>
-                                <td className='border border-slate-700 rounded-md text-center'>
-                                    {session.location}
-                                </td>
+                                
                                 <td className='border border-slate-700 rounded-md text-center'>
                                     {session.duration}
+                                </td>
+                                <td className={`border border-slate-700 rounded-md text-center ${session.cashOut - session.buyIn >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                                    {session.cashOut - session.buyIn > 0 ? '+' : ''}{
+                                    session.cashOut - session.buyIn}
                                 </td>
                                 <td className='border border-slate-700 rounded-md text-center'>
                                     <div className='flex justify-center gap-x-4'>

@@ -12,12 +12,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // middleware for handling CORS policy
 //app.use(cors())
-
 app.use(cors(
     {   
-        origin: ['https://poker-tracker-xi.vercel.app'],
+        origin: ['https://poker-tracker-xi.vercel.app', process.env.FRONTEND_URL],
         methods: ['POST', 'GET', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
     }
 ))
 
