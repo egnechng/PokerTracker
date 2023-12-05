@@ -1,4 +1,4 @@
-# Poker Tracker (updated for Milestone 4)
+# Poker Tracker
 
 ## Overview
 
@@ -92,25 +92,23 @@ Card view
 
 
 ## Research Topics
-* Front-end Framework (6 points)
+* Front-end Framework
     * A front-end framework is a JavaScript library that helps developers build user interfaces and web applications.
     * I decided to go with the MERN stack for my project using React with Vite and Tailwind
-* Vite (3 points)
+* Vite
     * Provides a fast and efficient development environment, optimizes build
     * Easy to configure with React
-* Tailwind (2 points)
+* Tailwind
     * CSS framework for customizable and efficient styling
     * Avoid writing CSS styles, apply classes directly in markup
     * Improved performance
-* Axios (? points)
+* Axios
     * JS library for sending async HTTP requests to server
     * Helpful for making API calls to server from front end
-* User Authentication (6 points)
+* User Authentication
     * Used JSON Web Token for user authentication
     * If the provided credential matches the stored value, the user is successfully authenticated, and access is granted.
     * Users can view and manipulate their own sessions
-
-17 + ? points out of 10 required points
 
 ## [Link to Main Project File](server/index.js) 
 
