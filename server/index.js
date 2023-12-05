@@ -2,6 +2,7 @@ import express from "express"
 import './config.js'
 import mongoose from 'mongoose'
 import sessionRoutes from './routes/sessionRoutes.js'
+import authRoutes from './routes/authRoutes.js'
 import cors from 'cors'
 
 const app = express()
@@ -28,8 +29,9 @@ app.get('/', (req, res) => {
 
 // route middleware
 app.use('/sessions', sessionRoutes)
+// Use authentication routes
+app.use('/auth', authRoutes);
 
-// console.log(process.env.MONGODB_URI)
 mongoose
     .connect(process.env.MONGODB_URI)
     .then(() => {

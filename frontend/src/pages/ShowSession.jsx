@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import BackButton from '../components/BackButton.jsx'
 import Spinner from '../components/Spinner.jsx'
+import { useSnackbar } from 'notistack'
 
-// const API_URL = 'https://poker-tracker-backend.vercel.app'
 const API_URL = import.meta.env.VITE_REACT_APP_BASE_URL;
 
 const ShowSession = () => {
     const [session, setSession] = useState([])
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
+    const { enqueueSnackbar } = useSnackbar()
     const { id } = useParams() 
 
     const formattedDate = session.date ? session.date.split('T')[0] : ''
@@ -18,21 +21,35 @@ const ShowSession = () => {
 
     useEffect(() => {
         setLoading(true)
-        console.log('id is:', id)
-        axios.get(`${API_URL}/sessions/${id}`)
-            .then((res) => {
-                setSession(res.data) // res.data or res.data.data?
-                setLoading(false)
-            }).catch((error) => {
-                console.log(error)
-                setLoading(false)
-            })
+        const storedUser = localStorage.getItem('user')
+        if (storedUser) {
+            const parsedUser = JSON.parse(storedUser)
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${parsedUser.token}`
+                }
+            }
+            console.log('id is:', id)
+            axios.get(`${API_URL}/sessions/${id}`, config)
+                .then((res) => {
+                    setSession(res.data) // res.data or res.data.data?
+                    setLoading(false)
+                }).catch((error) => {
+                    setLoading(false)
+                    console.log('error here', error)
+                    enqueueSnackbar('Error: ' + error.response.data.message, { variant: 'error' })
+                    navigate('/')
+            })  
+        } else{
+            navigate('/login')
+        }
+        
     }, []) 
 
     return (
         <div className='p-4'>
             <BackButton />
-            <h1 className='text-3xl my-4'>Show Session</h1>
+            <h1 className='text-3xl my-4'>Session Details</h1>
             {loading ? (
                 <Spinner />
             ) : (
@@ -64,8 +81,8 @@ const ShowSession = () => {
                     <div className='my-4'>
                         <span className='text-x1 mr-4 text-gray-500'>P/L</span>
                         <span className={`${session.cashOut - session.buyIn >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                        {'$'}
-                        {session.cashOut - session.buyIn}
+                        {session.cashOut - session.buyIn > 0 ? '+$' : '-$'}
+                        {Math.abs(session.cashOut - session.buyIn).toLocaleString()}
                         </span>
                     </div>
                     <div className='my-4'>

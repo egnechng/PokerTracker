@@ -3,13 +3,12 @@ import BackButton from '../components/BackButton.jsx'
 import Spinner from '../components/Spinner.jsx'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useSnackbar } from 'notistack'
 
-// const API_URL = 'https://poker-tracker-backend.vercel.app'
 const API_URL = import.meta.env.VITE_REACT_APP_BASE_URL;
 
 const EditSession = () => {
   // form stuff, states
-
   const today = new Date()
   const [date, setDate] = useState(today.toISOString().split('T')[0])
   const [gameType, setGameType] = useState('')
@@ -21,29 +20,49 @@ const EditSession = () => {
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
-  
+  const { enqueueSnackbar } = useSnackbar()
+  const storedUser = localStorage.getItem('user')
   const { id } = useParams()
   useEffect(() => {
     setLoading(true)
-    axios.get(`${API_URL}/sessions/${id}`)
-    .then((res) => {
-      setGameType(res.data.gameType)
-      setBlinds(res.data.blinds)
-      setLocation(res.data.location)
-      setBuyIn(res.data.buyIn)
-      setCashOut(res.data.cashOut)
-      setDuration(res.data.duration)
-      setDate(res.data.date.split('T')[0])
-      setLoading(false)
-    }).catch((error) => {
-      setLoading(false)
-      alert('Error Occured. Check Console')
-      console.log(error)
-    })
+        if (storedUser) {
+            const parsedUser = JSON.parse(storedUser)
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${parsedUser.token}`
+                }
+            }
+          axios.get(`${API_URL}/sessions/${id}`, config)
+            .then((res) => {
+              setGameType(res.data.gameType)
+              setBlinds(res.data.blinds)
+              setLocation(res.data.location)
+              setBuyIn(res.data.buyIn)
+              setCashOut(res.data.cashOut)
+              setDuration(res.data.duration)
+              setDate(res.data.date.split('T')[0])
+              setLoading(false)
+            }).catch((error) => {
+              setLoading(false)
+              // alert('Error Occured. Check Console')
+              enqueueSnackbar('Error: ' + error.response.data.message, { variant: 'error' })
+              console.log(error)
+              navigate('/')
+          })
+        } else {
+          navigate('/login')
+        }
   }, [])
 
 
   const handleEditSession = () => {
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser)
+      const config = {
+          headers: {
+              Authorization: `Bearer ${parsedUser.token}`
+          }
+      }
     const data = {
       gameType,
       blinds,
@@ -54,16 +73,21 @@ const EditSession = () => {
       date
     }
     setLoading(true)
-    axios.put(`${API_URL}/sessions/${id}`, data)
+    axios.put(`${API_URL}/sessions/${id}`, data, config)
       .then(() => {
         setLoading(false)
+        enqueueSnackbar('Session Edited Successfully', { variant: 'success' })
         navigate('/') // redirect to home
       })
       .catch((error) => {
         setLoading(false)
-        alert('Error Occured. Check Console')
+        // alert('Error Occured. Check Console')
+        enqueueSnackbar('Error: ' + error.response.data.message, { variant: 'error' })
         console.log(error)
       })
+    } else {
+      navigate('/login')
+    }
   }
 
   return (
@@ -83,12 +107,17 @@ const EditSession = () => {
         </div>
         <div className='my-4'>
             <label className='text-x1 mr-4 text-gray-500'>Game</label>
-            <input 
-              type='text' 
+            <select 
               value={gameType} 
               onChange={(e) => setGameType(e.target.value)}
               className='border-2 border-gray-500 px-4 py-2 w-full'
-            />  
+            >
+              <option value=''></option>
+              <option value='NLH'>NLH</option>
+              <option value='PLO'>PLO</option>
+              <option value='Mixed'>Mixed</option>
+              <option value='Other'>Other</option>
+            </select>
         </div>
         <div className='my-4'>
             <label className='text-x1 mr-4 text-gray-500'>Blinds</label>

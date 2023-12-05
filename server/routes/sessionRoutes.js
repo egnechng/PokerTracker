@@ -1,11 +1,22 @@
 import express from 'express'
 import { GameSession } from '../models/sessionModel.js'
+import authMiddleware from '../middleware/authMiddleware.js'
 
 const router = express.Router()
+
+// protect
+router.use(authMiddleware)
 
 // Route to Add a new session
 router.post('/', async (req, res) => {
     try {
+        // authenticated user
+        const authenticatedUser = req.user
+
+        if (!authenticatedUser) {
+            return res.status(401).send({ message: 'User not authenticated' })
+        }
+
         if (!req.body.gameType || !req.body.blinds || !req.body.duration || !req.body.location || 
             !req.body.buyIn || !req.body.cashOut || !req.body.date 
         ) { 
@@ -13,6 +24,7 @@ router.post('/', async (req, res) => {
         }
         // save new gameSession
         const newGameSession = {
+            user: authenticatedUser._id,
             gameType: req.body.gameType,
             blinds: req.body.blinds,
             duration: req.body.duration,
@@ -35,7 +47,13 @@ router.post('/', async (req, res) => {
 // Route for Getting all sessions from db
 router.get('/', async (req, res) => {
     try {
-        const sessions = await GameSession.find({})
+        // authenticated user
+        const authenticatedUser = req.user
+
+        if (!authenticatedUser) {
+            return res.status(401).send({ message: 'User not authenticated' })
+        }
+        const sessions = await GameSession.find({user: authenticatedUser._id})
         // return 200 and send books to client
         return res.status(200).json({
             count: sessions.length,
@@ -50,8 +68,19 @@ router.get('/', async (req, res) => {
 // Route for getting sepcific session by id
 router.get('/:id', async (req, res) => {
     try {
+        const authenticatedUser = req.user
+
+        if (!authenticatedUser) {
+            return res.status(401).send({ message: 'User not authenticated' })
+        }
+
         const { id } = req.params;
         const session = await GameSession.findById(id)
+
+        // make sure user owns this session
+        if (session.user.toString() !== authenticatedUser._id.toString()) {
+            return res.status(401).send({ message: 'User does not own this session.' })
+        }
         // return 200 and send books to client
         return res.status(200).json(session)
     } catch (error) {
@@ -61,9 +90,14 @@ router.get('/:id', async (req, res) => {
 })
 
 // Route for updating a session
-// TODO: Make sure this works later
 router.put('/:id', async (req, res) => {
     try {
+        const authenticatedUser = req.user
+
+        if (!authenticatedUser) {
+            return res.status(401).send({ message: 'User not authenticated' })
+        }
+
         if (!req.body.gameType || !req.body.blinds || !req.body.duration || !req.body.location || 
             !req.body.buyIn || !req.body.cashOut || !req.body.date 
         ) {
@@ -71,6 +105,14 @@ router.put('/:id', async (req, res) => {
         }
 
         const { id } = req.params
+        const session = await GameSession.findById(id)
+        
+        // make sure user owns this session
+        if (session.user.toString() !== authenticatedUser._id.toString()) {
+            return res.status(401).send({ message: 'User does not own this session.' })
+        }
+
+        // update seession
         const result = await GameSession.findByIdAndUpdate(id, req.body)
         if (!result) {
             return res.status(404).send({ message: `Session with id ${id} not found.`})
@@ -83,10 +125,22 @@ router.put('/:id', async (req, res) => {
 })
 
 // Route for deleting a session
-// TODO: Make sure this works later
 router.delete('/:id', async (req, res) => {
     try {
+        const authenticatedUser = req.user
+
+        if (!authenticatedUser) {
+            return res.status(401).send({ message: 'User not authenticated' })
+        }
+
         const { id } = req.params
+        const session = await GameSession.findById(id)
+        
+        // make sure user owns this session
+        if (session.user.toString() !== authenticatedUser._id.toString()) {
+            return res.status(401).send({ message: 'User does not own this session' })
+        }
+        
         const result = await GameSession.findByIdAndDelete(id)
         if (!result) {
             return res.status(404).send({ message: `Session with id ${id} not found.`})

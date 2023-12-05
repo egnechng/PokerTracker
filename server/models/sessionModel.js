@@ -3,6 +3,11 @@ import mongoose from 'mongoose'
 // Schema for a Game Session
 const SessionSchema = new mongoose.Schema(
     {
+        user: { 
+            type: mongoose.Schema.Types.ObjectId, 
+            required: true,
+            ref: 'User' 
+        },
         gameType: { type: String, required: true, },
         blinds: { type: String, required: true, },
         buyIn: { type: Number, required: true },
