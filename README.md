@@ -39,7 +39,7 @@ An Example Game Session with session details:
 ```
 ## [Link to Session Schema](server/models/sessionModel.js) 
 
-## Wireframes (not updated since Milestone 3)
+## Wireframes
 
 / - home page that displays all of the user's logged sessions
 
