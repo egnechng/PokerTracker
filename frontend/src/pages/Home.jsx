@@ -18,7 +18,7 @@ const Home = () => {
 
     const sortedSessions = sessions
         .slice() // Create a copy to avoid mutating the original array
-        .sort((a, b) => new Date(a.date) - new Date(b.date));
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
     const bankroll = sessions.reduce((a, b) => a + (b.cashOut - b.buyIn), 0)
     // This effect runs after every render (componentDidUpdate)
     useEffect(() => {
